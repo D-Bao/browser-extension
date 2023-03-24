@@ -1,9 +1,9 @@
-.simplelogin-extension--button-wrapper {
+.sl-button-wrapper {
   position: absolute;
   z-index: 999999;
 }
 
-.simplelogin-extension--button {
+.sl-button {
   cursor: pointer;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
   max-height: 30px;
@@ -22,14 +22,14 @@
   background-size: contain;
 }
 
-.simplelogin-extension--button:hover {
+.sl-button:hover {
   transform: translate(-50%, -50%) scale(1.2);
 }
 
-.simplelogin-extension--button.loading {
+.sl-button.loading {
   background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' style='margin: auto; background: none; display: block; shape-rendering: auto;' width='200px' height='200px' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid'%3E%3Ccircle cx='50' cy='50' fill='none' stroke='%23aa2990' stroke-width='10' r='35' stroke-dasharray='164.93361431346415 56.97787143782138' transform='rotate(178.465 50 50)'%3E%3CanimateTransform attributeName='transform' type='rotate' repeatCount='indefinite' dur='1s' values='0 50 50;360 50 50' keyTimes='0;1'%3E%3C/animateTransform%3E%3C/circle%3E%3C/svg%3E");
 }
 
-.simplelogin-extension--button.loading:hover {
+.sl-button.loading:hover {
   transform: translate(-50%, -50%);
 }

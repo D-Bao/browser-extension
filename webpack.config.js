@@ -18,12 +18,15 @@ const loadDevConfig = () => {
 
 const devConfig = loadDevConfig();
 
+const CSS_INJECTED_CLASS_PREFIX = 'simplelogin-extension--';
+
 const config = {
   mode: process.env.NODE_ENV,
   context: __dirname + '/src',
   entry: {
     'background': './background/index.js',
     'popup/popup': './popup/popup.js',
+    'content_script/input_tools': ['./content_script/input_tools.css', './content_script/input_tools.js'],
   },
   output: {
     path: __dirname + '/dist',
@@ -43,15 +46,29 @@ const config = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         options: {
-            presets: [
-              {'plugins': ['@babel/plugin-proposal-class-properties']
+          presets: [
+            {
+              'plugins': ['@babel/plugin-proposal-class-properties']
             }
           ]
         }
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader',
+        {
+          loader: 'postcss-loader',
+          options: {
+            postcssOptions: {
+              plugins: [
+                require('postcss-prefixer')({
+                  prefix: CSS_INJECTED_CLASS_PREFIX
+                })
+              ]
+            }
+          }
+        }
+        ],
       },
       {
         test: /\.scss$/,
@@ -84,6 +101,7 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       global: 'window',
+      'CSS_INJECTED_CLASS_PREFIX': JSON.stringify(CSS_INJECTED_CLASS_PREFIX),
     }),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
